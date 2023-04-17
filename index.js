@@ -10,7 +10,8 @@ app.use(bodyParser.json());
 
 const mongoose = require('mongoose');
 mongoose.set("strictQuery", false);
-mongoose.connect('mongodb://hjkjj1847:abcd1234@ac-rbrkiq0-shard-00-00.eunh4te.mongodb.net:27017,ac-rbrkiq0-shard-00-01.eunh4te.mongodb.net:27017,ac-rbrkiq0-shard-00-02.eunh4te.mongodb.net:27017/?ssl=true&replicaSet=atlas-gtl8c7-shard-0&authSource=admin&retryWrites=true&w=majority',
+// 사용자 아이디 비번 지움
+mongoose.connect('mongodb://사용자아이디:비번@ac-rbrkiq0-shard-00-00.eunh4te.mongodb.net:27017,ac-rbrkiq0-shard-00-01.eunh4te.mongodb.net:27017,ac-rbrkiq0-shard-00-02.eunh4te.mongodb.net:27017/?ssl=true&replicaSet=atlas-gtl8c7-shard-0&authSource=admin&retryWrites=true&w=majority',
     {}).then(() => console.log("MongoDB Connected..."))
     .catch((err) => console.log(err));
 

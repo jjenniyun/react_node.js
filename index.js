@@ -2,21 +2,24 @@ const express = require("express");
 const app = express();
 const port = 5000;
 const bodyParser = require('body-parser');
+
+const config = require('./config/key');
+
 const {User} = require('./models/User');
 
+// application/urlencoded
 app.use(bodyParser.urlencoded({extended:true}));
-
+// application/json
 app.use(bodyParser.json());
 
 const mongoose = require('mongoose');
 mongoose.set("strictQuery", false);
-// 사용자 아이디 비번 지움
-mongoose.connect('mongodb://사용자아이디:비번@ac-rbrkiq0-shard-00-00.eunh4te.mongodb.net:27017,ac-rbrkiq0-shard-00-01.eunh4te.mongodb.net:27017,ac-rbrkiq0-shard-00-02.eunh4te.mongodb.net:27017/?ssl=true&replicaSet=atlas-gtl8c7-shard-0&authSource=admin&retryWrites=true&w=majority',
-    {}).then(() => console.log("MongoDB Connected..."))
+
+mongoose.connect(config.mongoURI,{}).then(() => console.log("MongoDB Connected..."))
     .catch((err) => console.log(err));
 
 app.get("/", (req, res) => {
-  res.send("Hello World! 안녕하세요:)");
+  res.send("Hello World! 안녕하세요:) 벌써 곧 5월이야...ㅠㅠㅠ");
 });
 
 app.post('/register', (req, res)=>{

@@ -16,7 +16,7 @@ function LandingPage() {
         height: "100vh",
       }}
     >
-      LandingPage
+      시작페이지
     </div>
   );
 }

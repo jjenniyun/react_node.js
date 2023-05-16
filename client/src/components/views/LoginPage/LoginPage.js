@@ -1,10 +1,10 @@
 //import axios from "axios";
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { loginUser } from "../../../_action/user_action";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { loginUser, Auth } from '../../../_action/user_action';
+import { useNavigate } from 'react-router-dom';
 
-function LoginPage(props) {
+function LoginPage() {
   const dispatch = useDispatch();
   let navigate = useNavigate();
 
@@ -20,22 +20,25 @@ function LoginPage(props) {
   };
 
   const onSubmitHandler = (event) => {
+    // 페이지가 refresh되는 것을 막아주기 위해서
     event.preventDefault();
 
     let body = {
       email: Email,
-      password: Password,
-    };
+      password: Password
+    }
 
-    dispatch(loginUser(body)).then((response) => {
+    dispatch(loginUser(body))
+    .then(response => {
       if (response.payload.loginSuccess) {
-        navigate("/api/hello");
-        //props.history.push("/");
+        //alert("로그인이 완료되었습니다.");
+        navigate("/");
+        //react router 업데이트 : props.history.push("/"); useNavigate변경
       } else {
-        alert("Error");
+        alert("로그인 중 오류가 발생하였습니다.");
       }
     });
-  };
+  }
 
   return (
     <div
@@ -49,18 +52,17 @@ function LoginPage(props) {
     >
       <form
         style={{ display: "flex", flexDirection: "column" }}
-        onSubmit={onSubmitHandler}
-      >
+        onSubmit={onSubmitHandler}>
         <label>Email</label>
         <input type="email" value={Email} onChange={onEmailHandler} />
         <label>Password</label>
         <input type="password" value={Password} onChange={onPassHandler} />
 
         <br />
-        <button>Login</button>
+        <button type='submit'>Login</button>
       </form>
     </div>
   );
 }
-
-export default LoginPage;
+//Auth(false)
+export default Auth(LoginPage, false);
